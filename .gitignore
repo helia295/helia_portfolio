@@ -5,3 +5,9 @@ __pycache__
 python3-virtualenv
 flask.sqlite
 .DS_Store
+app/static/img/hobbies/**/*.jpg
+app/static/img/hobbies/**/*.JPG
+app/static/img/hobbies/**/*.jpeg
+app/static/img/hobbies/**/*.JPEG
+app/static/img/hobbies/**/*.png
+app/static/img/hobbies/**/*.HEIC

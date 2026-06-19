@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="Helia Dinh — Projects & Interests">
+    <meta property="og:description" content="Projects, Research, and Interests beyond work.">
+    <meta property="og:url" content="{{ url }}/hobbies">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+    <script src="{{ url_for('static', filename='scripts/hobbies.js') }}" defer></script>
+    <title>{{ title }}</title>
+</head>
+
+<body class="interests-page">
+    <header class="interests-header">
+        <a class="interests-brand" href="/" aria-label="Return to portfolio home">
+            <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="">
+        </a>
+
+        <div class="interests-intro">
+            <p class="interests-kicker">A closer look</p>
+            <h1>Projects, Ideas &amp; Interests</h1>
+            <p>
+                A showcase of personal work that I'm proud of and creative passions
+                that keep me curious away from the screen.
+            </p>
+        </div>
+    </header>
+
+    <main class="interests-main">
+        <div class="accordion" aria-label="Project and interest categories">
+            {% for section in hobby_sections %}
+                <details
+                    class="accordion-section"
+                    id="{{ section['slug'] }}"
+                    name="interest-sections"
+                    {% if loop.first %}open{% endif %}
+                >
+                    <summary>
+                        <span class="accordion-index" aria-hidden="true">
+                            {{ "%02d" | format(loop.index) }}
+                        </span>
+                        <span class="accordion-title">
+                            <strong>{{ section['name'] }}</strong>
+                            <span>{{ section['intro'] }}</span>
+                        </span>
+                        <span class="accordion-toggle" aria-hidden="true"></span>
+                    </summary>
+
+                    <div class="accordion-panel">
+                        {% if section['kind'] == "projects" %}
+                            <div class="project-showcase">
+                                {% for item in section['items'] %}
+                                    <article class="project-card">
+                                        <div class="project-preview project-preview-{{ item.theme }}" aria-hidden="true">
+                                            <span class="project-preview-label">{{ item.label }}</span>
+                                            <strong>{{ item.title }}</strong>
+                                            <span class="project-preview-line"></span>
+                                            <span class="project-preview-line project-preview-line-short"></span>
+                                        </div>
+
+                                        <div class="project-copy">
+                                            <p class="project-label">{{ item.label }}</p>
+                                            <h2>{{ item.title }}</h2>
+                                            <p>{{ item.caption }}</p>
+                                            <p class="project-tech">{{ item.tech }}</p>
+
+                                            <div class="project-links">
+                                                {% for link in item.links %}
+                                                    <a href="{{ link.url }}" target="_blank" rel="noreferrer">
+                                                        {{ link.label }}
+                                                        <svg viewBox="0 0 16 16" aria-hidden="true">
+                                                            <path d="M5 3h8v8M13 3 4 12"></path>
+                                                        </svg>
+                                                    </a>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </article>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {% if section['items'] %}
+                                <div class="photo-gallery">
+                                    {% for item in section['items'] %}
+                                        <figure class="photo-card">
+                                            <img
+                                                src="{{ url_for('static', filename='img/' ~ item.image) }}"
+                                                alt="{{ item.alt }}"
+                                                loading="lazy"
+                                            >
+                                            <figcaption>{{ item.caption }}</figcaption>
+                                        </figure>
+                                    {% endfor %}
+                                </div>
+                            {% else %}
+                                <div class="gallery-placeholder">
+                                    <div>
+                                        <p class="gallery-label">Personal collection</p>
+                                        <h2>Photos and short stories coming next.</h2>
+                                        <p>
+                                            This space is ready to grow into a captioned
+                                            gallery.
+                                        </p>
+                                    </div>
+
+                                    <div class="gallery-preview" aria-hidden="true">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </div>
+                                </div>
+                            {% endif %}
+
+                            {% if section.get('reserved_feature') == "travel-map" %}
+                                <div class="map-reservation">
+                                    <span class="map-pin"></span>
+                                    <p>
+                                        Reserved for an interactive map of places
+                                        I’ve visited.
+                                    </p>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </details>
+            {% endfor %}
+        </div>
+    </main>
+</body>
+</html>
