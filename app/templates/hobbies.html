@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% from "macros.html" import site_navigation %}
 <html lang="en">
 
 <head>
@@ -19,6 +20,8 @@
 </head>
 
 <body class="interests-page">
+    {{ site_navigation(navigation, active_endpoint) }}
+
     <header class="interests-header">
         <a class="interests-brand" href="/" aria-label="Return to portfolio home">
             <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="">

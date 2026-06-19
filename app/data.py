@@ -3,7 +3,7 @@
 HOBBIES = [
     {
         "name": "Coding & Research",
-        "slug": "building-research",
+        "slug": "coding-research",
         "description": (
             "Creating AI products, building personal projects, and exploring "
             "AI/ML/DL research questions."
@@ -30,6 +30,7 @@ HOBBIES = [
         "description": "Slowing down, experimenting with color, and making things by hand.",
     },
 ]
+
 
 HOBBY_SECTIONS = [
     {
@@ -178,11 +179,6 @@ HOBBY_SECTIONS = [
                 "caption": "A golden sunset by the water in Kauai.",
             },
             {
-                "image": "hobbies/travel/lamberton.webp",
-                "alt": "Friends visiting a tropical conservatory",
-                "caption": "An afternoon among the plants at Lamberton Conservatory.",
-            },
-            {
                 "image": "hobbies/travel/locomoco.webp",
                 "alt": "Plates of loco moco and other Hawaiian food",
                 "caption": "Trying loco moco and local comfort food in Hawaii.",
@@ -190,7 +186,12 @@ HOBBY_SECTIONS = [
             {
                 "image": "hobbies/travel/puu_poa_beach.webp",
                 "alt": "Friends standing in the shallow water at Puu Poa Beach",
-                "caption": "A beach day with friends at Puu Poa.",
+                "caption": "A beach day with friends at Puu Poa Beach, Kauai.",
+            },
+            {
+                "image": "hobbies/travel/lamberton.webp",
+                "alt": "Friends visiting a tropical conservatory",
+                "caption": "An afternoon among the plants at Lamberton Conservatory (Rochester, NY).",
             },
             {
                 "image": "hobbies/travel/singapore.webp",
@@ -209,22 +210,22 @@ HOBBY_SECTIONS = [
             {
                 "image": "hobbies/photography/hangout.webp",
                 "alt": "Shadows of friends cast across grass and flowers",
-                "caption": "A sunny afternoon remembered through shadows.",
+                "caption": "A sunny afternoon remembered through shadows (Rochester, NY).",
             },
             {
                 "image": "hobbies/photography/hanoi_hoguom.webp",
                 "alt": "Red bridge crossing Hoan Kiem Lake in Hanoi",
-                "caption": "A quiet view across Hoan Kiem Lake in Hanoi.",
+                "caption": "A quiet view across Hoan Kiem Lake in Hanoi, VN.",
             },
             {
                 "image": "hobbies/photography/holga2.webp",
                 "alt": "Yellow car framed through an autumn leaf",
-                "caption": "Playing with perspective, autumn color, and a yellow Mini (taken with Holga film).",
+                "caption": "Playing with perspective, autumn color, and a yellow Mini (taken with Holga film @Lancaster, PA).",
             },
             {
                 "image": "hobbies/photography/rugby.webp",
                 "alt": "Players competing during an outdoor rugby match",
-                "caption": "Freezing a fast moment during a college rugby match.",
+                "caption": "Freezing a fast moment during a college rugby match (Lancaster, PA).",
             },
             {
                 "image": "hobbies/photography/starry_sky_kauai.webp",
@@ -357,4 +358,3 @@ EXPERIENCES = [
         ),
     },
 ]
-

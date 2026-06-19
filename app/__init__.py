@@ -1,11 +1,35 @@
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, request, url_for
 from dotenv import load_dotenv
 
 from .data import EDUCATION, EXPERIENCES, HOBBIES, HOBBY_SECTIONS
 
 load_dotenv()
 app = Flask(__name__)
+
+NAVIGATION = [
+    {"endpoint": "index", "label": "Home"},
+    {"endpoint": "hobbies", "label": "Projects & Hobbies"},
+]
+
+
+@app.context_processor
+def inject_navigation():
+    available_endpoints = {rule.endpoint for rule in app.url_map.iter_rules()}
+    navigation = [
+        {
+            "label": item["label"],
+            "url": url_for(item["endpoint"]),
+            "endpoint": item["endpoint"],
+        }
+        for item in NAVIGATION
+        if item["endpoint"] in available_endpoints
+    ]
+
+    return {
+        "navigation": navigation,
+        "active_endpoint": request.endpoint,
+    }
 
 
 @app.route('/')

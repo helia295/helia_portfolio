@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% from "macros.html" import hobby_list, timeline %}
+{% from "macros.html" import hobby_list, site_navigation, timeline %}
 <html lang="en">
 
 <head>
@@ -21,6 +21,8 @@
 </head>
 
 <body>
+    {{ site_navigation(navigation, active_endpoint) }}
+
     <header class="nav-bar">
         <div class="nav-content">
             <a href="/">
