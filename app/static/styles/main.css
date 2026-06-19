@@ -1,9 +1,25 @@
+:root {
+    --color-primary: #1d539f;
+    --color-primary-dark: #17375e;
+    --color-accent: #f7bd32;
+    --color-background: #f5f5f9;
+    --color-surface: #ffffff;
+    --color-text: #1f2d40;
+    --color-text-muted: #465267;
+    --color-text-subtle: #667288;
+    --color-border: #e2e6ef;
+    --color-timeline: #d9e1ed;
+    --color-on-dark: #d8e3f2;
+    --color-number-overlay: rgba(255, 255, 255, 0.12);
+    --shadow-section: 0 18px 45px rgba(29, 83, 159, 0.08);
+}
+
 p, h1, h2, h3, h4, h5, h6, button {
     font-family: "Roboto", serif;
 }
 
 body {
-    background-color: #f5f5f9;
+    background-color: var(--color-background);
     background-size: cover;
     width: auto; 
     overflow-x: hidden;
@@ -14,7 +30,7 @@ body {
 .nav-bar {
     width: 100%;
     display: inline-block;
-    background-color: #1C539F;
+    background-color: var(--color-primary);
     font-family: "Roboto", serif;
     font-weight: 700 !important;
     padding-top: 10px;
@@ -50,7 +66,7 @@ body {
 }
 
 .profile {
-    background-color: #1d539f !important;
+    background-color: var(--color-primary) !important;
     text-align: center;
     height: 320px;
     margin-bottom: 50px;
@@ -61,7 +77,7 @@ body {
 .profile h1 {
         font-size: 50px;
         font-weight: 700;
-        color: white;
+        color: var(--color-surface);
 }
 
 .profile img {
@@ -79,7 +95,7 @@ body {
     margin-right: auto;
     width: 200px;
     height: 200px;
-    border: 4px solid white;
+    border: 4px solid var(--color-surface);
     border-radius: 50%;
     box-sizing: border-box;
     overflow: hidden;
@@ -88,7 +104,7 @@ body {
 .banner {
     padding: 20px 0px 50px 0px;
     height: 150px;
-    background-color: #1d539f;
+    background-color: var(--color-primary);
 }
 
 .banner .logo {
@@ -99,7 +115,7 @@ body {
 }
 
 .banner .title {
-    color: white;
+    color: var(--color-surface);
     font-size: 50px;
     font-weight: 700;
 }
@@ -116,15 +132,15 @@ main {
     margin: 0 auto 80px;
     padding: 48px 52px;
     box-sizing: border-box;
-    background-color: white;
-    border: 1px solid #e2e6ef;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: 18px;
-    box-shadow: 0 18px 45px rgba(29, 83, 159, 0.08);
+    box-shadow: var(--shadow-section);
 }
 
 .about-heading h2 {
     margin: 0;
-    color: #17375e;
+    color: var(--color-primary-dark);
     font-size: 34px;
     line-height: 1.15;
 }
@@ -134,12 +150,12 @@ main {
     width: 48px;
     height: 4px;
     margin-top: 16px;
-    background-color: #f7bd32;
+    background-color: var(--color-accent);
     border-radius: 999px;
 }
 
 .about-content {
-    color: #465267;
+    color: var(--color-text-muted);
     font-size: 17px;
     line-height: 1.75;
 }
@@ -149,7 +165,7 @@ main {
 }
 
 .about-content .about-lead {
-    color: #1f2d40;
+    color: var(--color-text);
     font-size: 21px;
     font-weight: 500;
     line-height: 1.55;
@@ -161,8 +177,8 @@ main {
     gap: 10px 24px;
     margin: 28px 0 0;
     padding: 22px 0 0;
-    border-top: 1px solid #e2e6ef;
-    color: #1d539f;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-primary);
     font-size: 15px;
     font-weight: 700;
     list-style: none;
@@ -175,8 +191,149 @@ main {
 .interest-list li:not(:last-child)::after {
     position: absolute;
     right: -14px;
-    color: #f7bd32;
+    color: var(--color-accent);
     content: "•";
+}
+
+.portfolio-section {
+    margin-bottom: 80px;
+}
+
+.section-heading {
+    margin-bottom: 34px;
+}
+
+.section-heading p {
+    margin: 0 0 8px;
+    color: var(--color-primary);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.section-heading h2 {
+    margin: 0;
+    color: var(--color-primary-dark);
+    font-size: 36px;
+    line-height: 1.2;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 28px;
+}
+
+.timeline::before {
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: 6px;
+    width: 2px;
+    background-color: var(--color-timeline);
+    content: "";
+}
+
+.timeline-entry {
+    position: relative;
+    padding: 0 0 36px 32px;
+}
+
+.timeline-entry:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-marker {
+    position: absolute;
+    top: 6px;
+    left: -28px;
+    width: 12px;
+    height: 12px;
+    background-color: var(--color-accent);
+    border: 4px solid var(--color-background);
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+.timeline-content {
+    padding: 28px 32px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 14px;
+}
+
+.timeline-dates {
+    margin: 0 0 8px;
+    color: var(--color-primary);
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.timeline-content h3 {
+    margin: 0;
+    color: var(--color-text);
+    font-size: 21px;
+    line-height: 1.35;
+}
+
+.timeline-organization {
+    margin: 6px 0 14px;
+    color: var(--color-text-subtle);
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.timeline-description {
+    margin: 0;
+    color: var(--color-text-muted);
+    font-size: 16px;
+    line-height: 1.65;
+}
+
+.hobby-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.hobby-item:first-child {
+    grid-column: 1 / -1;
+    min-height: 130px;
+    background-color: var(--color-primary);
+}
+
+.hobby-item {
+    position: relative;
+    min-height: 150px;
+    padding: 28px;
+    overflow: hidden;
+    background-color: var(--color-primary-dark);
+    border-radius: 14px;
+}
+
+.hobby-number {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    color: var(--color-number-overlay);
+    font-size: 48px;
+    font-weight: 900;
+}
+
+.hobby-item h3 {
+    position: relative;
+    margin: 0 0 12px;
+    color: var(--color-surface);
+    font-size: 21px;
+}
+
+.hobby-item p {
+    position: relative;
+    max-width: 34ch;
+    margin: 0;
+    color: var(--color-on-dark);
+    font-size: 15px;
+    line-height: 1.6;
 }
 
 @media (max-width: 700px) {
@@ -203,6 +360,38 @@ main {
 
     .about-content .about-lead {
         font-size: 19px;
+    }
+
+    .portfolio-section {
+        margin-bottom: 56px;
+    }
+
+    .section-heading h2 {
+        font-size: 30px;
+    }
+
+    .timeline {
+        padding-left: 20px;
+    }
+
+    .timeline::before {
+        left: 4px;
+    }
+
+    .timeline-entry {
+        padding-left: 22px;
+    }
+
+    .timeline-marker {
+        left: -24px;
+    }
+
+    .timeline-content {
+        padding: 24px;
+    }
+
+    .hobby-grid {
+        grid-template-columns: 1fr;
     }
 }
 
