@@ -95,3 +95,117 @@ body {
     font-size: 50px;
     font-weight: 700;
 }
+
+main {
+    width: min(calc(100% - 40px), 960px);
+    margin: 0 auto;
+}
+
+.about-section {
+    display: grid;
+    grid-template-columns: minmax(160px, 0.55fr) minmax(0, 1.45fr);
+    gap: 64px;
+    margin: 0 auto 80px;
+    padding: 48px 52px;
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid #e2e6ef;
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(29, 83, 159, 0.08);
+}
+
+.about-heading h2 {
+    margin: 0;
+    color: #17375e;
+    font-size: 34px;
+    line-height: 1.15;
+}
+
+.about-heading-line {
+    display: block;
+    width: 48px;
+    height: 4px;
+    margin-top: 16px;
+    background-color: #f7bd32;
+    border-radius: 999px;
+}
+
+.about-content {
+    color: #465267;
+    font-size: 17px;
+    line-height: 1.75;
+}
+
+.about-content p {
+    margin: 0 0 18px;
+}
+
+.about-content .about-lead {
+    color: #1f2d40;
+    font-size: 21px;
+    font-weight: 500;
+    line-height: 1.55;
+}
+
+.interest-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+    margin: 28px 0 0;
+    padding: 22px 0 0;
+    border-top: 1px solid #e2e6ef;
+    color: #1d539f;
+    font-size: 15px;
+    font-weight: 700;
+    list-style: none;
+}
+
+.interest-list li {
+    position: relative;
+}
+
+.interest-list li:not(:last-child)::after {
+    position: absolute;
+    right: -14px;
+    color: #f7bd32;
+    content: "•";
+}
+
+@media (max-width: 700px) {
+    main {
+        width: min(calc(100% - 28px), 960px);
+    }
+
+    .about-section {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        margin-bottom: 48px;
+        padding: 34px 28px;
+        border-radius: 14px;
+    }
+
+    .about-heading h2 {
+        font-size: 30px;
+    }
+
+    .about-content {
+        font-size: 16px;
+        line-height: 1.7;
+    }
+
+    .about-content .about-lead {
+        font-size: 19px;
+    }
+}
+
+@media (max-width: 420px) {
+    .interest-list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px 16px;
+    }
+
+    .interest-list li::after {
+        display: none;
+    }
+}
