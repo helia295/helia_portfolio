@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% from "macros.html" import hobby_list, timeline %}
 <html lang="en">
 
 <head>
@@ -82,6 +83,36 @@
                 </ul>
             </div>
         </section>
+
+        {% if experiences %}
+            <section class="portfolio-section" aria-labelledby="experience-heading">
+                <div class="section-heading">
+                    <p>Where I’m growing</p>
+                    <h2 id="experience-heading">Experience</h2>
+                </div>
+                {{ timeline(experiences) }}
+            </section>
+        {% endif %}
+
+        {% if education %}
+            <section class="portfolio-section" aria-labelledby="education-heading">
+                <div class="section-heading">
+                    <p>What shaped my foundation</p>
+                    <h2 id="education-heading">Education</h2>
+                </div>
+                {{ timeline(education) }}
+            </section>
+        {% endif %}
+
+        {% if hobbies %}
+            <section class="portfolio-section hobbies-section" aria-labelledby="hobbies-heading">
+                <div class="section-heading">
+                    <p>What I build and enjoy</p>
+                    <h2 id="hobbies-heading">Projects, Ideas &amp; Interests</h2>
+                </div>
+                {{ hobby_list(hobbies) }}
+            </section>
+        {% endif %}
     </main>
 </body>
 </html>

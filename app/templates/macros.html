@@ -1,0 +1,30 @@
+{% macro timeline(entries) %}
+    <div class="timeline">
+        {% for entry in entries %}
+            <article class="timeline-entry">
+                <div class="timeline-marker" aria-hidden="true"></div>
+                <div class="timeline-content">
+                    <p class="timeline-dates">{{ entry.dates }}</p>
+                    <h3>{{ entry.title }}</h3>
+                    <p class="timeline-organization">{{ entry.organization }}</p>
+                    <p class="timeline-description">{{ entry.description }}</p>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+{% endmacro %}
+
+
+{% macro hobby_list(hobbies) %}
+    <div class="hobby-grid">
+        {% for hobby in hobbies %}
+            <article class="hobby-item" id="{{ hobby.slug }}">
+                <span class="hobby-number" aria-hidden="true">
+                    {{ "%02d" | format(loop.index) }}
+                </span>
+                <h3>{{ hobby.name }}</h3>
+                <p>{{ hobby.description }}</p>
+            </article>
+        {% endfor %}
+    </div>
+{% endmacro %}
