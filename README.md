@@ -11,66 +11,82 @@ For each of these tasks, you should create an [Issue](https://docs.github.com/en
 *Note: Make sure to include a link to the Issue you're progressing on inside of your Pull Request so your reviewer knows what you're progressing on!*
 
 ### GitHub Tasks
-- [x] Create Issues for each task below
-- [x] Progress on each task in a new branch
-- [x] Open a Pull Request when a task is finished to get feedback
+- [ ] Create Issues for each task below
+- [ ] Progress on each task in a new branch
+- [ ] Open a Pull Request when a task is finished to get feedback
 
 ### Portfolio Tasks
-- [x] Add a photo of yourself to the website
-- [x] Add an "About youself" section to the website.
-- [x] Add your previous work experiences
-- [x] Add your hobbies (including images)
-- [x] Add your current/previous education
-- [x] Add a map of all the cool locations/countries you visited
+- [ ] Add a photo of yourself to the website
+- [ ] Add an "About yourself" section to the website
+- [ ] Add your previous work experiences
+- [ ] Add your hobbies (including images)
+- [ ] Add your current/previous education
+- [ ] Add a map of all the cool locations/countries you visited
 
 ### Flask Tasks
 - [x] Get your Flask app running locally on your machine using the instructions below.
-- [x] Add a template for adding multiple work experiences/education/hobbies using [Jinja](https://jinja.palletsprojects.com/en/3.0.x/api/#basics)
-- [x] Create a new page to display hobbies.
-- [x] Add a menu bar that dynamically displays other pages in the app
+- [ ] Add a template for adding multiple work experiences/education/hobbies using [Jinja](https://jinja.palletsprojects.com/en/3.0.x/api/#basics)
+- [ ] Create a new page to display hobbies
+- [ ] Add a menu bar that dynamically displays other pages in the app
 
-
-## Getting Started
-
-You need to do all your progress here.
 
 ## Installation
 
-Make sure you have python3 and pip installed
+This project has been tested with Python 3.10.
 
-Create and activate virtual environment using virtualenv
+From the repository root, create and activate a project-local virtual
+environment:
+
 ```bash
-$ python -m venv python3-virtualenv
-$ source python3-virtualenv/bin/activate
+python3.10 -m venv .venv
+source .venv/bin/activate
 ```
 
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install all dependencies!
+If `python3.10` is not available as a command, use the path to your local
+Python 3.10 installation.
+
+Install the dependencies:
 
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
 ## Usage
 
-Create a .env file using the example.env template (make a copy using the variables inside of the template)
+Create your local environment file from the committed example:
 
-Start flask development server
 ```bash
-$ export FLASK_ENV=development
-$ flask run
+cp example.env .env
 ```
 
-You should get a response like this in the terminal:
+The `.env` file and `.venv` directory are intentionally ignored by Git. Do not
+commit either one.
+
+Start the Flask development server:
+
+```bash
+export FLASK_ENV=development
+flask run --port 5001
 ```
-❯ flask run
+
+You should see output similar to:
+
+```
  * Environment: development
  * Debug mode: on
- * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
+ * Running on http://127.0.0.1:5001/ (Press CTRL+C to quit)
 ```
 
-You'll now be able to access the website at `localhost:5000` or `127.0.0.1:5000` in the browser! 
+Open [http://127.0.0.1:5001](http://127.0.0.1:5001) in your browser. Stop the
+server with `Ctrl+C`, and leave the virtual environment with `deactivate`.
 
-*Note: The portfolio site will only work on your local machine while you have it running inside of your terminal. We'll go through how to host it in the cloud in the next few weeks!* 
+### Port 5000 on macOS
+
+Recent versions of macOS may use port 5000 for AirPlay Receiver. If visiting
+`127.0.0.1:5000` shows an HTTP 403 error, use port 5001 as shown above or
+disable AirPlay Receiver in **System Settings → General → AirDrop & Handoff**.
+
+The portfolio is only available locally while the Flask server is running.
 
 ## Contributing
 
