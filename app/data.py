@@ -12,12 +12,12 @@ EXPERIENCES = [
         ),
     },
     {
-        "title": "Production Engineering Fellow",
-        "organization": "MLH Fellowship · Meta program",
+        "title": "Production Engineering Fellow/Intern",
+        "organization": "MLH Fellowship · Meta",
         "dates": "June 2026 – September 2026",
         "description": (
             "Build practical production engineering skills through projects, "
-            "technical collaboration, and guidance from experienced engineers."
+            "technical collaboration, and guidance from experienced engineers from Meta."
         ),
     },
     {
@@ -25,7 +25,7 @@ EXPERIENCES = [
         "organization": "Handshake AI",
         "dates": "April 2026 – June 2026",
         "description": (
-            "Evaluated LLM-generated code and tests, developed reference "
+            "Evaluated LLM-generated code and tests, developed golden "
             "solutions, and identified correctness gaps and missing edge cases."
         ),
     },
@@ -45,7 +45,7 @@ EXPERIENCES = [
         "dates": "January 2024 – December 2025",
         "description": (
             "Led hands-on labs and supported 100+ students across "
-            "computational neuroscience, data mining, and advanced algorithms "
+            "Computational Neuroscience, Data Mining, and Advanced Algorithms "
             "through lectures, grading, office hours, and mentorship."
         ),
     },
@@ -54,9 +54,8 @@ EXPERIENCES = [
         "organization": "VNPAY Solutions",
         "dates": "June 2022 – August 2022",
         "description": (
-            "Built data pipelines for 3,000+ merchant sites, created an "
-            "internal Flask-backed monitoring dashboard, and developed an "
-            "XGBoost fraud model that reached 92% ROC-AUC."
+            "Built web scraping, data, and fraud detection pipelines to automate risk analysis across 3,000+ merchant sites, created an "
+            "internal Flask-backed monitoring dashboard, reducing manual workloads and improving efficiency significantly."
         ),
     },
     {
