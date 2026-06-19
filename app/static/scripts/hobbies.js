@@ -11,6 +11,10 @@ function openSectionFromHash() {
     sections.forEach((section) => {
         section.open = section === target;
     });
+
+    window.requestAnimationFrame(() => {
+        target.scrollIntoView({ block: "start" });
+    });
 }
 
 sections.forEach((section) => {

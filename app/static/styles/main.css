@@ -4,6 +4,7 @@
     --color-accent: #f7bd32;
     --color-background: #f5f5f9;
     --color-surface: #ffffff;
+    --color-surface-muted: #f4f7fc;
     --color-text: #1f2d40;
     --color-text-muted: #465267;
     --color-text-subtle: #667288;
@@ -16,6 +17,187 @@
 
 p, h1, h2, h3, h4, h5, h6, button {
     font-family: "Roboto", serif;
+}
+
+.site-navigation {
+    position: relative;
+    z-index: 20;
+    background-color: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.site-navigation-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: min(calc(100% - 40px), 1120px);
+    min-height: 72px;
+    margin: 0 auto;
+}
+
+.site-identity {
+    display: inline-flex;
+    gap: 12px;
+    align-items: center;
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.site-monogram {
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    color: var(--color-primary-dark);
+    background-color: var(--color-accent);
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: -0.03em;
+}
+
+.site-identity > span:last-child {
+    display: grid;
+    gap: 2px;
+}
+
+.site-identity strong {
+    font-size: 16px;
+    line-height: 1.1;
+}
+
+.site-identity small {
+    color: var(--color-text-subtle);
+    font-size: 12px;
+    line-height: 1.1;
+}
+
+.site-navigation-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.site-navigation-links a {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--color-text-muted);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.site-navigation-links a::after {
+    position: absolute;
+    right: 0;
+    bottom: 5px;
+    left: 0;
+    height: 3px;
+    background-color: var(--color-accent);
+    border-radius: 999px;
+    content: "";
+    opacity: 0;
+    transform: scaleX(0.55);
+    transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.site-navigation-links a:hover,
+.site-navigation-links a[aria-current="page"] {
+    color: var(--color-primary);
+}
+
+.site-navigation-links a:hover::after,
+.site-navigation-links a[aria-current="page"]::after {
+    opacity: 1;
+    transform: scaleX(1);
+}
+
+.site-identity:focus-visible,
+.site-navigation a:focus-visible,
+.site-navigation summary:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: 4px;
+}
+
+.site-navigation-menu {
+    display: none;
+    position: relative;
+}
+
+.site-navigation-menu summary {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    min-height: 44px;
+    color: var(--color-primary-dark);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 800;
+    list-style: none;
+}
+
+.site-navigation-menu summary::-webkit-details-marker {
+    display: none;
+}
+
+.menu-icon,
+.menu-icon::before,
+.menu-icon::after {
+    display: block;
+    width: 18px;
+    height: 2px;
+    background-color: currentColor;
+    border-radius: 999px;
+    content: "";
+}
+
+.menu-icon {
+    position: relative;
+}
+
+.menu-icon::before {
+    position: absolute;
+    top: -6px;
+}
+
+.menu-icon::after {
+    position: absolute;
+    top: 6px;
+}
+
+.site-navigation-menu ul {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: min(250px, calc(100vw - 28px));
+    margin: 0;
+    padding: 8px;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    box-shadow: var(--shadow-section);
+    list-style: none;
+}
+
+.site-navigation-menu a {
+    display: block;
+    padding: 12px 14px;
+    color: var(--color-text-muted);
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.site-navigation-menu a:hover,
+.site-navigation-menu a[aria-current="page"] {
+    color: var(--color-primary);
+    background-color: var(--color-surface-muted);
 }
 
 body {
@@ -305,10 +487,30 @@ main {
 .hobby-item {
     position: relative;
     min-height: 150px;
-    padding: 28px;
     overflow: hidden;
     background-color: var(--color-primary-dark);
     border-radius: 14px;
+    transition: box-shadow 180ms ease, transform 180ms ease;
+}
+
+.hobby-link {
+    display: flex;
+    flex-direction: column;
+    min-height: inherit;
+    padding: 28px;
+    color: inherit;
+    text-decoration: none;
+}
+
+.hobby-item:hover,
+.hobby-item:focus-within {
+    box-shadow: 0 16px 34px rgba(23, 55, 94, 0.2);
+    transform: translateY(-3px);
+}
+
+.hobby-link:focus-visible {
+    outline: 3px solid var(--color-accent);
+    outline-offset: -6px;
 }
 
 .hobby-number {
@@ -336,7 +538,49 @@ main {
     line-height: 1.6;
 }
 
+.hobby-link-label {
+    display: inline-flex;
+    gap: 7px;
+    align-items: center;
+    align-self: flex-start;
+    margin-top: auto;
+    padding-top: 20px;
+    color: var(--color-accent);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.hobby-link-label svg {
+    width: 16px;
+    height: 16px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.8;
+    transition: transform 180ms ease;
+}
+
+.hobby-link:hover .hobby-link-label svg {
+    transform: translateX(3px);
+}
+
 @media (max-width: 700px) {
+    .site-navigation-inner {
+        width: min(calc(100% - 28px), 1120px);
+        min-height: 68px;
+    }
+
+    .site-navigation-links {
+        display: none;
+    }
+
+    .site-navigation-menu {
+        display: block;
+    }
+
     main {
         width: min(calc(100% - 28px), 960px);
     }
@@ -477,6 +721,7 @@ main {
 }
 
 .accordion-section {
+    scroll-margin-top: 24px;
     border-bottom: 1px solid var(--color-border);
 }
 
@@ -869,6 +1114,20 @@ main {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .hobby-item,
+    .hobby-link-label svg {
+        transition: none;
+    }
+
+    .hobby-item:hover,
+    .hobby-item:focus-within {
+        transform: none;
+    }
+
+    .site-navigation-links a::after {
+        transition: none;
+    }
+
     .accordion-toggle::before,
     .accordion-toggle::after {
         transition: none;

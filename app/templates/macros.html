@@ -19,12 +19,71 @@
     <div class="hobby-grid">
         {% for hobby in hobbies %}
             <article class="hobby-item" id="{{ hobby.slug }}">
-                <span class="hobby-number" aria-hidden="true">
-                    {{ "%02d" | format(loop.index) }}
-                </span>
-                <h3>{{ hobby.name }}</h3>
-                <p>{{ hobby.description }}</p>
+                <a
+                    class="hobby-link"
+                    href="{{ url_for('hobbies') }}#{{ hobby.slug }}"
+                    aria-label="Explore {{ hobby.name }}"
+                >
+                    <span class="hobby-number" aria-hidden="true">
+                        {{ "%02d" | format(loop.index) }}
+                    </span>
+                    <h3>{{ hobby.name }}</h3>
+                    <p>{{ hobby.description }}</p>
+                    <span class="hobby-link-label" aria-hidden="true">
+                        Explore
+                        <svg viewBox="0 0 16 16">
+                            <path d="M3 8h10M9 4l4 4-4 4"></path>
+                        </svg>
+                    </span>
+                </a>
             </article>
         {% endfor %}
     </div>
+{% endmacro %}
+
+
+{% macro site_navigation(navigation, active_endpoint) %}
+    <nav class="site-navigation" aria-label="Primary navigation">
+        <div class="site-navigation-inner">
+            <a class="site-identity" href="{{ url_for('index') }}">
+                <span class="site-monogram" aria-hidden="true">HD</span>
+                <span>
+                    <strong>Helia Dinh</strong>
+                    <small>Software &amp; ML Engineer</small>
+                </span>
+            </a>
+
+            <ul class="site-navigation-links">
+                {% for item in navigation %}
+                    <li>
+                        <a
+                            href="{{ item.url }}"
+                            {% if item.endpoint == active_endpoint %}aria-current="page"{% endif %}
+                        >
+                            {{ item.label }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+
+            <details class="site-navigation-menu">
+                <summary>
+                    <span>Menu</span>
+                    <span class="menu-icon" aria-hidden="true"></span>
+                </summary>
+                <ul>
+                    {% for item in navigation %}
+                        <li>
+                            <a
+                                href="{{ item.url }}"
+                                {% if item.endpoint == active_endpoint %}aria-current="page"{% endif %}
+                            >
+                                {{ item.label }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </details>
+        </div>
+    </nav>
 {% endmacro %}
