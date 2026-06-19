@@ -14,8 +14,8 @@
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
 
-    <link lang='sass' rel="stylesheet" href="./static/styles/main.css">
-    <link rel='icon' href='./static/img/favicon.ico' type='image/x-icon' />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
     <title>{{ title }}</title>
 </head>
 
@@ -24,15 +24,20 @@
         <div class="nav-content">
             <a href="/">
                 <div class="nav-logo">
-                    <img src="./static/img/logo.svg" />
+                    <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="MLH Fellowship">
                 </div>
             </a>
         </div>
     </header>
 
     <div class="profile">
-        <div id="profile-picture" class="profile-picture">
-            <img src="./static/img/logo.jpg">
+        <div class="profile-picture">
+            <img
+                src="{{ url_for('static', filename='img/IMG_7330.jpg') }}"
+                alt="Portrait of Helia Dinh"
+                width="200"
+                height="200"
+            >
         </div>
         <h1>{{ title }}</h1>
     </div>
