@@ -19,23 +19,32 @@
     <div class="hobby-grid">
         {% for hobby in hobbies %}
             <article class="hobby-item" id="{{ hobby.slug }}">
-                <a
-                    class="hobby-link"
-                    href="{{ url_for('hobbies') }}#{{ hobby.slug }}"
-                    aria-label="Explore {{ hobby.name }}"
-                >
+                <div class="hobby-link">
                     <span class="hobby-number" aria-hidden="true">
                         {{ "%02d" | format(loop.index) }}
                     </span>
                     <h3>{{ hobby.name }}</h3>
                     <p>{{ hobby.description }}</p>
-                    <span class="hobby-link-label" aria-hidden="true">
-                        Explore
-                        <svg viewBox="0 0 16 16">
-                            <path d="M3 8h10M9 4l4 4-4 4"></path>
-                        </svg>
+                    <span class="hobby-actions">
+                        <a
+                            class="hobby-link-label"
+                            href="{{ url_for('hobbies') }}#{{ hobby.slug }}"
+                        >
+                            Explore
+                            <svg viewBox="0 0 16 16" aria-hidden="true">
+                                <path d="M3 8h10M9 4l4 4-4 4"></path>
+                            </svg>
+                        </a>
+                        {% if hobby.slug == "travel" %}
+                            <a class="hobby-link-label hobby-map-link" href="{{ url_for('map_page') }}">
+                                Map
+                                <svg viewBox="0 0 16 16" aria-hidden="true">
+                                    <path d="M3 8h10M9 4l4 4-4 4"></path>
+                                </svg>
+                            </a>
+                        {% endif %}
                     </span>
-                </a>
+                </div>
             </article>
         {% endfor %}
     </div>

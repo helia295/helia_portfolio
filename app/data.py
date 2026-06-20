@@ -1,5 +1,73 @@
 """Portfolio content passed to the Jinja templates."""
 
+VISITED_PLACES = [
+    {
+        "name": "Vietnam",
+        "coordinates": [21.0285, 105.8542],
+        "region": "Asia",
+    },
+    {
+        "name": "Kauai, Hawaii",
+        "coordinates": [22.0964, -159.5261],
+        "region": "United States",
+    },
+    {
+        "name": "New York",
+        "coordinates": [42.9538, -75.5268],
+        "region": "United States",
+    },
+    {
+        "name": "Boston",
+        "coordinates": [42.3601, -71.0589],
+        "region": "United States",
+    },
+    {
+        "name": "Madison, Wisconsin",
+        "coordinates": [43.0731, -89.4012],
+        "region": "United States",
+    },
+    {
+        "name": "California",
+        "coordinates": [36.7783, -119.4179],
+        "region": "United States",
+    },
+    {
+        "name": "Hong Kong",
+        "coordinates": [22.3193, 114.1694],
+        "region": "Asia",
+    },
+    {
+        "name": "Thailand",
+        "coordinates": [13.7563, 100.5018],
+        "region": "Asia",
+    },
+    {
+        "name": "Malaysia",
+        "coordinates": [3.139, 101.6869],
+        "region": "Asia",
+    },
+    {
+        "name": "Singapore",
+        "coordinates": [1.3521, 103.8198],
+        "region": "Asia",
+    },
+    {
+        "name": "Pennsylvania",
+        "coordinates": [40.0379, -76.3055],
+        "region": "United States",
+    },
+    {
+        "name": "New Orleans",
+        "coordinates": [29.9511, -90.0715],
+        "region": "United States",
+    },
+    {
+        "name": "Maine",
+        "coordinates": [44.3106, -69.7795],
+        "region": "United States",
+    },
+]
+
 HOBBIES = [
     {
         "name": "Coding & Research",
@@ -158,8 +226,7 @@ HOBBY_SECTIONS = [
         "name": "Travel",
         "slug": "travel",
         "intro": (
-            "Places, food, and everyday details collected along the way. "
-            "A travel map will join this section in a later update."
+            "Places, food, and everyday details collected along the way."
         ),
         "kind": "gallery",
         "items": [

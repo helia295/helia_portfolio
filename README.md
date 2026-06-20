@@ -11,23 +11,31 @@ For each of these tasks, you should create an [Issue](https://docs.github.com/en
 *Note: Make sure to include a link to the Issue you're progressing on inside of your Pull Request so your reviewer knows what you're progressing on!*
 
 ### GitHub Tasks
-- [ ] Create Issues for each task below
-- [ ] Progress on each task in a new branch
-- [ ] Open a Pull Request when a task is finished to get feedback
+- [x] Create Issues for each task below
+- [x] Progress on each task in a new branch
+- [x] Open a Pull Request when a task is finished to get feedback
 
 ### Portfolio Tasks
-- [ ] Add a photo of yourself to the website
-- [ ] Add an "About yourself" section to the website
-- [ ] Add your previous work experiences
-- [ ] Add your hobbies (including images)
-- [ ] Add your current/previous education
-- [ ] Add a map of all the cool locations/countries you visited
+- [x] Add a photo of yourself to the website
+- [x] Add an "About yourself" section to the website
+- [x] Add your previous work experiences
+- [x] Add your hobbies (including images)
+- [x] Add your current/previous education
+- [x] Add a map of all the cool locations/countries you visited
 
 ### Flask Tasks
 - [x] Get your Flask app running locally on your machine using the instructions below.
-- [ ] Add a template for adding multiple work experiences/education/hobbies using [Jinja](https://jinja.palletsprojects.com/en/3.0.x/api/#basics)
-- [ ] Create a new page to display hobbies
-- [ ] Add a menu bar that dynamically displays other pages in the app
+- [x] Add a template for adding multiple work experiences/education/hobbies using [Jinja](https://jinja.palletsprojects.com/en/3.0.x/api/#basics)
+- [x] Create a new page to display hobbies
+- [x] Add a menu bar that dynamically displays other pages in the app
+
+## Features
+
+- Responsive home page with an introduction, experience, education, and interests
+- Reusable Jinja templates backed by structured portfolio data
+- Projects and hobbies page with collapsible categories and image galleries
+- Interactive travel map with 13 visited places, map markers, and a place index
+- Shared responsive navigation with active-page states and in-app section links
 
 
 ## Installation

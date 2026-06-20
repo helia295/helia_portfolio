@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, url_for
 from dotenv import load_dotenv
 
-from .data import EDUCATION, EXPERIENCES, HOBBIES, HOBBY_SECTIONS
+from .data import EDUCATION, EXPERIENCES, HOBBIES, HOBBY_SECTIONS, VISITED_PLACES
 
 load_dotenv()
 app = Flask(__name__)
@@ -10,6 +10,7 @@ app = Flask(__name__)
 NAVIGATION = [
     {"endpoint": "index", "label": "Home"},
     {"endpoint": "hobbies", "label": "Projects & Hobbies"},
+    {"endpoint": "map_page", "label": "Map"},
 ]
 
 
@@ -51,4 +52,15 @@ def hobbies():
         title="Projects & Interests",
         url=os.getenv("URL"),
         hobby_sections=HOBBY_SECTIONS,
+        visited_places=VISITED_PLACES,
+    )
+
+
+@app.route('/map')
+def map_page():
+    return render_template(
+        'map.html',
+        title="Places I've Visited",
+        url=os.getenv("URL"),
+        visited_places=VISITED_PLACES,
     )
