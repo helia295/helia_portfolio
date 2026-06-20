@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+{% from "macros.html" import site_navigation %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="Helia Dinh — Places I've Visited">
+    <meta property="og:description" content="An interactive map of places I've visited.">
+    <meta property="og:url" content="{{ url }}/map">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap"
+        rel="stylesheet">
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+        crossorigin=""
+    >
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""
+        defer
+    ></script>
+    <script src="{{ url_for('static', filename='scripts/travel-map.js') }}" defer></script>
+    <title>{{ title }}</title>
+</head>
+
+<body class="map-page">
+    {{ site_navigation(navigation, active_endpoint) }}
+
+    <main class="map-main">
+        <header class="map-heading">
+            <div>
+                <h1>Places I've Visited</h1>
+                <p>
+                    A growing collection of cities, states, islands, and countries
+                    that I have explored so far.
+                </p>
+            </div>
+            <p class="map-count">
+                <strong>{{ visited_places | length }}</strong>
+                <span>visited places</span>
+            </p>
+        </header>
+
+        <div class="map-layout">
+            <section class="map-canvas-panel" aria-label="Interactive travel map">
+                <div
+                    class="travel-map travel-map-full"
+                    data-travel-map
+                    data-map-mode="full"
+                    aria-label="Interactive map showing places Helia has visited"
+                ></div>
+                <p class="map-help">
+                    Drag to explore, use the controls to zoom, or select a place from the list.
+                </p>
+            </section>
+
+            <aside class="place-index" aria-labelledby="place-index-heading">
+                <div class="place-index-heading">
+                    <h2 id="place-index-heading">Place index</h2>
+                    <p>Select a place to locate it on the map.</p>
+                </div>
+                <ol data-place-index>
+                    {% for place in visited_places %}
+                        <li>
+                            <button type="button" data-place-name="{{ place.name }}">
+                                <span>{{ "%02d" | format(loop.index) }}</span>
+                                <strong>{{ place.name }}</strong>
+                                <small>{{ place.region }}</small>
+                            </button>
+                        </li>
+                    {% endfor %}
+                </ol>
+            </aside>
+        </div>
+    </main>
+
+    <script id="travel-map-data" type="application/json">
+        {{ visited_places | tojson }}
+    </script>
+</body>
+</html>
