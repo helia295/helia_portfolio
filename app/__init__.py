@@ -37,7 +37,7 @@ def inject_navigation():
 def index():
     return render_template(
         'index.html',
-        title="MLH Fellow",
+        title="Helia Dinh",
         url=os.getenv("URL"),
         experiences=EXPERIENCES,
         education=EDUCATION,
