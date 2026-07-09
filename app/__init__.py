@@ -38,6 +38,7 @@ NAVIGATION = [
     {"endpoint": "index", "label": "Home"},
     {"endpoint": "hobbies", "label": "Projects & Hobbies"},
     {"endpoint": "map_page", "label": "Map"},
+    {"endpoint": "timeline", "label": "Timeline"},
 ]
 
 
@@ -90,6 +91,15 @@ def map_page():
         title="Places I've Visited",
         url=os.getenv("URL"),
         visited_places=VISITED_PLACES,
+    )
+
+
+@app.route('/timeline')
+def timeline():
+    return render_template(
+        'timeline.html',
+        title="Timeline",
+        url=os.getenv("URL"),
     )
 
 
