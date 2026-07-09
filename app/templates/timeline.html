@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+{% from "macros.html" import site_navigation %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="Helia Dinh — Timeline">
+    <meta property="og:description" content="Public timeline updates from Helia's journey.">
+    <meta property="og:url" content="{{ url }}/timeline">
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+    <script src="{{ url_for('static', filename='scripts/timeline.js') }}" defer></script>
+    <title>{{ title }}</title>
+</head>
+
+<body class="timeline-page">
+    {{ site_navigation(navigation, active_endpoint) }}
+
+    <main class="timeline-page-main">
+        <header class="timeline-page-heading">
+            <div>
+                <p class="timeline-page-label">Public notes</p>
+                <h1>Timeline</h1>
+                <p>
+                    A little timeline corner for public updates, encouragement,
+                    and notes about my journey. 
+                </p>
+            </div>
+        </header>
+
+        <div class="timeline-page-layout">
+            <section class="timeline-form-card" aria-labelledby="timeline-form-heading">
+                <p class="timeline-card-label">Add an update</p>
+                <h2 id="timeline-form-heading">Share a timeline post</h2>
+                <p>
+                    Feel free to leave a public note for me below.
+                </p>
+
+                <form id="timeline-form" class="timeline-form">
+                    <div class="form-field">
+                        <label for="timeline-name">Name</label>
+                        <input
+                            id="timeline-name"
+                            name="name"
+                            type="text"
+                            autocomplete="name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-field">
+                        <label for="timeline-email">Email</label>
+                        <input
+                            id="timeline-email"
+                            name="email"
+                            type="email"
+                            autocomplete="email"
+                            required
+                        >
+                        <p class="field-hint">
+                            Used only to display your Gravatar-style avatar.
+                        </p>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="timeline-content">Post</label>
+                        <textarea
+                            id="timeline-content"
+                            name="content"
+                            rows="5"
+                            required
+                        ></textarea>
+                    </div>
+
+                    <button class="timeline-submit" type="submit">
+                        Post update
+                    </button>
+
+                    <p
+                        id="timeline-status"
+                        class="timeline-status"
+                        role="status"
+                        aria-live="polite"
+                    ></p>
+                </form>
+            </section>
+
+            <section class="timeline-feed-card" aria-labelledby="timeline-feed-heading">
+                <div class="timeline-feed-heading">
+                    <div>
+                        <p class="timeline-card-label">Latest first</p>
+                        <h2 id="timeline-feed-heading">Recent posts</h2>
+                    </div>
+                    <button
+                        id="timeline-refresh"
+                        class="timeline-refresh"
+                        type="button"
+                    >
+                        Refresh
+                    </button>
+                </div>
+
+                <div
+                    id="timeline-posts"
+                    class="timeline-post-list"
+                    aria-live="polite"
+                >
+                    <article class="timeline-empty">
+                        <h3>Loading timeline posts…</h3>
+                        <p>Please hold on for one tiny database hop.</p>
+                    </article>
+                </div>
+
+                <noscript>
+                    <p class="timeline-status">
+                        JavaScript is required to load and submit timeline posts on this page.
+                    </p>
+                </noscript>
+            </section>
+        </div>
+    </main>
+</body>
+</html>
