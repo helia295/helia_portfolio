@@ -1,8 +1,16 @@
 import datetime
 import os
+import re
 from flask import Flask, render_template, request, url_for
 from dotenv import load_dotenv
-from peewee import CharField, DateTimeField, Model, MySQLDatabase, TextField
+from peewee import (
+    CharField,
+    DateTimeField,
+    Model,
+    MySQLDatabase,
+    TextField,
+    SqliteDatabase,
+)
 from playhouse.shortcuts import model_to_dict
 
 from .data import EDUCATION, EXPERIENCES, HOBBIES, HOBBY_SECTIONS, VISITED_PLACES
@@ -10,13 +18,18 @@ from .data import EDUCATION, EXPERIENCES, HOBBIES, HOBBY_SECTIONS, VISITED_PLACE
 load_dotenv()
 app = Flask(__name__)
 
-mydb = MySQLDatabase(
-    os.getenv("MYSQL_DATABASE"),
-    user=os.getenv("MYSQL_USER"),
-    password=os.getenv("MYSQL_PASSWORD"),
-    host=os.getenv("MYSQL_HOST"),
-    port=3306,
-)
+if os.getenv("TESTING") == "true":
+    print("Running in test mode")
+    mydb = SqliteDatabase("file:memory?mode=memory&cache=shared", uri=True)
+else:
+    mydb = MySQLDatabase(
+        os.getenv("MYSQL_DATABASE"),
+        user=os.getenv("MYSQL_USER"),
+        password=os.getenv("MYSQL_PASSWORD"),
+        host=os.getenv("MYSQL_HOST"),
+        port=3306,
+    )
+
 
 print(mydb)
 
@@ -61,10 +74,10 @@ def inject_navigation():
     }
 
 
-@app.route('/')
+@app.route("/")
 def index():
     return render_template(
-        'index.html',
+        "index.html",
         title="Helia Dinh",
         url=os.getenv("URL"),
         experiences=EXPERIENCES,
@@ -73,10 +86,10 @@ def index():
     )
 
 
-@app.route('/hobbies')
+@app.route("/hobbies")
 def hobbies():
     return render_template(
-        'hobbies.html',
+        "hobbies.html",
         title="Projects & Interests",
         url=os.getenv("URL"),
         hobby_sections=HOBBY_SECTIONS,
@@ -84,51 +97,60 @@ def hobbies():
     )
 
 
-@app.route('/map')
+@app.route("/map")
 def map_page():
     return render_template(
-        'map.html',
+        "map.html",
         title="Places I've Visited",
         url=os.getenv("URL"),
         visited_places=VISITED_PLACES,
     )
 
 
-@app.route('/timeline')
+@app.route("/timeline")
 def timeline():
     return render_template(
-        'timeline.html',
+        "timeline.html",
         title="Timeline",
         url=os.getenv("URL"),
     )
 
 
-@app.route('/api/timeline_post', methods=['POST'])
+@app.route("/api/timeline_post", methods=["POST"])
 def post_timeline_post():
-    name = request.form['name']
-    email = request.form['email']
-    content = request.form['content']
+    EMAIL_REGEX = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+    name = request.form.get("name")
+    email = request.form.get("email")
+    content = request.form.get("content")
+
+    if not name:
+        return "Invalid name", 400
+    if not email or not EMAIL_REGEX.match(email):
+        return "Invalid email", 400
+    if not content:
+        return "Invalid content", 400
+
     timeline_post = TimelinePost.create(name=name, email=email, content=content)
 
     return model_to_dict(timeline_post)
 
 
-@app.route('/api/timeline_post', methods=['GET'])
+@app.route("/api/timeline_post", methods=["GET"])
 def get_timeline_post():
     return {
-        'timeline_posts': [
+        "timeline_posts": [
             model_to_dict(post)
             for post in TimelinePost.select().order_by(TimelinePost.created_at.desc())
         ]
     }
 
 
-@app.route('/api/timeline_post/<int:post_id>', methods=['DELETE'])
+@app.route("/api/timeline_post/<int:post_id>", methods=["DELETE"])
 def delete_timeline_post(post_id):
     timeline_post = TimelinePost.get_or_none(TimelinePost.id == post_id)
 
     if timeline_post is None:
-        return {'error': 'Timeline post not found'}, 404
+        return {"error": "Timeline post not found"}, 404
 
     deleted_post = model_to_dict(timeline_post)
     timeline_post.delete_instance()
