@@ -1,6 +1,10 @@
 # tests.py
 import unittest
+import os
 from peewee import *
+
+os.environ['TESTING'] = 'true'
+
 from app import TimelinePost
 from playhouse.shortcuts import model_to_dict
 
