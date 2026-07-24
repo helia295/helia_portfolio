@@ -1,6 +1,7 @@
 import datetime
 import os
 import re
+import time
 from flask import Flask, render_template, request, url_for
 from dotenv import load_dotenv
 from peewee import CharField, DateTimeField, Model, MySQLDatabase, SqliteDatabase, TextField
@@ -36,8 +37,15 @@ class TimelinePost(Model):
         database = mydb
 
 
-mydb.connect(reuse_if_open=True)
-mydb.create_tables([TimelinePost])
+for attempt in range(30):
+    try:
+        mydb.connect(reuse_if_open=True)
+        mydb.create_tables([TimelinePost])
+        break
+    except Exception:
+        if attempt == 29:
+            raise
+        time.sleep(2)
 
 NAVIGATION = [
     {"endpoint": "index", "label": "Home"},

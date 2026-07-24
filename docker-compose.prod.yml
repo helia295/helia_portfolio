@@ -15,8 +15,11 @@ services:
     container_name: mysql
     image: mariadb
     restart: always
-    env_file:
-      - .env
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MARIADB_DATABASE: ${MYSQL_DATABASE}
+      MARIADB_USER: ${MYSQL_USER}
+      MARIADB_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
       - mydatabase:/var/lib/mysql
 
