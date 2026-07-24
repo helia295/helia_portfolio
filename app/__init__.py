@@ -3,14 +3,7 @@ import os
 import re
 from flask import Flask, render_template, request, url_for
 from dotenv import load_dotenv
-from peewee import (
-    CharField,
-    DateTimeField,
-    Model,
-    MySQLDatabase,
-    TextField,
-    SqliteDatabase,
-)
+from peewee import CharField, DateTimeField, Model, MySQLDatabase, SqliteDatabase, TextField
 from playhouse.shortcuts import model_to_dict
 
 from .data import EDUCATION, EXPERIENCES, HOBBIES, HOBBY_SECTIONS, VISITED_PLACES
@@ -20,7 +13,7 @@ app = Flask(__name__)
 
 if os.getenv("TESTING") == "true":
     print("Running in test mode")
-    mydb = SqliteDatabase("file:memory?mode=memory&cache=shared", uri=True)
+    mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
 else:
     mydb = MySQLDatabase(
         os.getenv("MYSQL_DATABASE"),
@@ -29,7 +22,6 @@ else:
         host=os.getenv("MYSQL_HOST"),
         port=3306,
     )
-
 
 print(mydb)
 

@@ -1,0 +1,10 @@
+.git
+.env
+.venv
+python3-virtualenv
+myenv
+__pycache__
+*.pyc
+.DS_Store
+.history
+app/static/img/hobbies
