@@ -17,12 +17,12 @@ VISITED_PLACES = [
         "region": "United States",
     },
     {
-        "name": "Boston",
+        "name": "Massachusetts",
         "coordinates": [42.3601, -71.0589],
         "region": "United States",
     },
     {
-        "name": "Madison, Wisconsin",
+        "name": "Wisconsin",
         "coordinates": [43.0731, -89.4012],
         "region": "United States",
     },
@@ -57,13 +57,18 @@ VISITED_PLACES = [
         "region": "United States",
     },
     {
-        "name": "New Orleans",
+        "name": "Maine",
+        "coordinates": [44.3106, -69.7795],
+        "region": "United States",
+    },
+    {
+        "name": "Louisiana",
         "coordinates": [29.9511, -90.0715],
         "region": "United States",
     },
     {
-        "name": "Maine",
-        "coordinates": [44.3106, -69.7795],
+        "name": "Nevada",
+        "coordinates": [39.8097, -119.5318],
         "region": "United States",
     },
 ]
@@ -73,19 +78,19 @@ HOBBIES = [
         "name": "Coding & Research",
         "slug": "coding-research",
         "description": (
-            "Creating AI products, building personal projects, and exploring "
+            "Building personal coding projects, and exploring "
             "AI/ML/DL research questions."
         ),
     },
     {
         "name": "Cooking & Baking",
         "slug": "cooking-baking",
-        "description": "Trying new recipes and turning kitchen ideas into side projects.",
+        "description": "Getting creative in the kitchen with new recipes and cuisines.",
     },
     {
         "name": "Travel",
         "slug": "travel",
-        "description": "Exploring new places through their food, culture, and everyday details.",
+        "description": "Exploring new destinations through their food, culture, and everyday details.",
     },
     {
         "name": "Photography",
@@ -134,7 +139,7 @@ HOBBY_SECTIONS = [
                 "title": "Syncode",
                 "label": "Distributed systems",
                 "caption": (
-                    "A Git-like distributed version control system with "
+                    "A Git-inspired distributed version control system with "
                     "branching, synchronization, merge workflows, and a Rust CLI."
                 ),
                 "tech": "Rust · CLI · Filesystems · Distributed systems",
@@ -193,12 +198,12 @@ HOBBY_SECTIONS = [
             {
                 "image": "hobbies/cooking/cookies.webp",
                 "alt": "Homemade cookies",
-                "caption": "I make really good choco chips cookies :)",
+                "caption": "Choco chips cookies are my go-to recipe :)",
             },
             {
                 "image": "hobbies/cooking/nem.webp",
                 "alt": "Nem (Vietnamese fried rolls) making",
-                "caption": "Professionally folding nem (Vietnamese fried spring rolls) with friends.",
+                "caption": "Folding nem (Vietnamese fried spring rolls) with friends.",
             },
             {
                 "image": "hobbies/cooking/strawberry_redvelvet.webp",
@@ -207,8 +212,8 @@ HOBBY_SECTIONS = [
             },
             {
                 "image": "hobbies/cooking/croissant.webp",
-                "alt": "Croissants served beside a floral teapot and teacup",
-                "caption": "A quiet tea break with freshly baked croissants.",
+                "alt": "Croissants served with tea",
+                "caption": "A quiet tea break with freshly baked croissants :)",
             },
             {
                 "image": "hobbies/cooking/eggtart.webp",
@@ -217,7 +222,7 @@ HOBBY_SECTIONS = [
             },
             {
                 "image": "hobbies/cooking/ramen_jjajang.webp",
-                "alt": "Spicy ramen and jjajang noodles served together",
+                "alt": "Spicy ramen and jjajang noodles",
                 "caption": "A Korean-inspired comfort-food night with friends.",
             },
         ],
@@ -233,12 +238,12 @@ HOBBY_SECTIONS = [
             {
                 "image": "hobbies/travel/biking_kauai.webp",
                 "alt": "Friends taking a break during a bike ride in Kauai",
-                "caption": "Exploring Kauai by bike with friends.",
+                "caption": "Exploring a Kauai trail by bike with friends.",
             },
             {
                 "image": "hobbies/travel/helicopter_napali.webp",
-                "alt": "View from a helicopter flying above the Na Pali Coast",
-                "caption": "Seeing the Na Pali Coast from above.",
+                "alt": "View from a helicopter flying above the Na Pali Coast, Kauai",
+                "caption": "Seeing the Na Pali Coast from a helicopter :)",
             },
             {
                 "image": "hobbies/travel/kauai_sunset.webp",
@@ -309,7 +314,7 @@ HOBBY_SECTIONS = [
     {
         "name": "Painting",
         "slug": "painting",
-        "intro": "A healing creative hobby built around color, texture, and curiosity.",
+        "intro": "A relaxing creative hobby of mine built around color, texture, and curiosity.",
         "kind": "gallery",
         "items": [
             {
@@ -358,7 +363,7 @@ EXPERIENCES = [
         ),
     },
     {
-        "title": "Production Engineering Fellow/Intern",
+        "title": "Production Engineering Fellow",
         "organization": "MLH Fellowship · Meta",
         "dates": "June 2026 – September 2026",
         "description": (
