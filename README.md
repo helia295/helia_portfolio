@@ -36,6 +36,7 @@ For each of these tasks, you should create an [Issue](https://docs.github.com/en
 - Projects and hobbies page with collapsible categories and image galleries
 - Interactive travel map with 13 visited places, map markers, and a place index
 - Shared responsive navigation with active-page states and in-app section links
+- Automated GitHub Actions test workflow for pull requests and `main` pushes
 
 
 ## Installation
