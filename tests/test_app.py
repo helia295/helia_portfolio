@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 os.environ['TESTING'] = 'true'
 
 from app import app
+from app.data import VISITED_PLACES
 
 
 class AppTestCase(unittest.TestCase):
@@ -151,6 +152,21 @@ class AppTestCase(unittest.TestCase):
         assert response.status_code == 400
         html = response.get_data(as_text=True)
         assert "Invalid email" in html
-        
-        
-        
+
+    def test_travel_counts_stay_in_sync(self):
+        expected_count = len(VISITED_PLACES)
+
+        hobbies_response = self.client.get("/hobbies")
+        assert hobbies_response.status_code == 200
+        hobbies_html = hobbies_response.get_data(as_text=True)
+        assert f"{expected_count} visited destinations" in hobbies_html
+
+        map_response = self.client.get("/map")
+        assert map_response.status_code == 200
+        map_html = map_response.get_data(as_text=True)
+        assert f"<strong>{expected_count}</strong>" in map_html
+
+        with open("README.md", encoding="utf-8") as readme_file:
+            readme = readme_file.read()
+
+        assert "13 visited places" not in readme

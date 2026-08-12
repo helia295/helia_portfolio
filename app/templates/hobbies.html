@@ -140,7 +140,7 @@
                                     <div class="travel-map-preview-copy">
                                         <div>
                                             <p class="map-label">Travel map</p>
-                                            <h2 id="travel-map-preview-heading">13 visited destinations</h2>
+                                            <h2 id="travel-map-preview-heading">{{ visited_places | length }} visited destinations</h2>
                                         </div>
                                         <a class="map-button" href="{{ url_for('map_page') }}">
                                             Open full map
