@@ -49,17 +49,21 @@ jobs:
             HostName $SSH_IP
             User $SSH_USER
             IdentityFile ~/.ssh/deploy-key.pem
+            BatchMode yes
+            ConnectTimeout 15
+            ServerAliveInterval 10
+            ServerAliveCountMax 3
             StrictHostKeyChecking no
           END
 
       - name: Print project root directory
-        run: ssh my-vps 'cd "${{ secrets.PROJECT_ROOT }}" && pwd'
+        run: timeout 45s ssh my-vps 'cd "${{ secrets.PROJECT_ROOT }}" && pwd'
 
       - name: Deploy site
-        run: ssh my-vps 'cd "${{ secrets.PROJECT_ROOT }}" && ./redeploy-site.sh'
+        run: timeout 10m ssh my-vps 'cd "${{ secrets.PROJECT_ROOT }}" && ./redeploy-site.sh'
 
       - name: Print container status
-        run: ssh my-vps 'cd "${{ secrets.PROJECT_ROOT }}" && docker compose -f docker-compose.prod.yml ps'
+        run: timeout 60s ssh my-vps 'cd "${{ secrets.PROJECT_ROOT }}" && docker compose -f docker-compose.prod.yml ps'
 
   notify-success:
     name: Send Discord success notification
