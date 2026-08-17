@@ -126,6 +126,10 @@ class AppTestCase(unittest.TestCase):
         submit_button = soup.find("button", class_="timeline-submit")
         assert submit_button["type"] == "submit"
 
+        assert soup.find("input", {"name": "name"})["maxlength"] == "80"
+        assert soup.find("input", {"name": "email"})["maxlength"] == "254"
+        assert soup.find("textarea", {"name": "content"})["maxlength"] == "500"
+
     def test_health_endpoint_checks_database(self):
         response = self.client.get("/health")
 
@@ -135,33 +139,92 @@ class AppTestCase(unittest.TestCase):
             "status": "ok",
             "database": "ok",
         }
+
+    def assert_timeline_validation_error(self, data, message, field):
+        response = self.client.post("/api/timeline_post", data=data)
+
+        assert response.status_code == 400
+        assert response.is_json
+        assert response.get_json() == {
+            "error": message,
+            "field": field,
+        }
         
     def test_malformed_timeline_post(self):
-        response = self.client.post("/api/timeline_post",data={
-            "email":"john@example.com",
-            "content":"Hello world, I am John!"
+        self.assert_timeline_validation_error(
+            {
+                "email": "john@example.com",
+                "content": "Hello world, I am John!",
+            },
+            "Please enter your name.",
+            "name",
+        )
+
+        self.assert_timeline_validation_error(
+            {
+                "name": "susan rosh",
+                "email": "susan@example.com",
+                "content": "   ",
+            },
+            "Please enter a timeline post.",
+            "content",
+        )
+
+        self.assert_timeline_validation_error(
+            {
+                "name": "susan rosh",
+                "email": "not-an-email",
+                "content": "Hello world, I\'m Susan!",
+            },
+            "Please enter a valid email address.",
+            "email",
+        )
+
+    def test_timeline_post_normalizes_safe_input(self):
+        response = self.client.post("/api/timeline_post", data={
+            "name": "  Susan Rosh  ",
+            "email": "  SUSAN@EXAMPLE.COM  ",
+            "content": "  Hello from the timeline!  ",
         })
-        assert response.status_code == 400
-        html = response.get_data(as_text=True)
-        assert "Invalid name" in html
-        
-        response = self.client.post("/api/timeline_post",data={
-            "name":"susan rosh",
-            "email":"susan@example.com",
-            "content":""
-        })
-        assert response.status_code == 400
-        html = response.get_data(as_text=True)
-        assert "Invalid content" in html
-        
-        response = self.client.post("/api/timeline_post",data={
-            "name":"susan rosh",
-            "email":"not-an-email",
-            "content":"Hello world, I\'m Susan!"
-        })
-        assert response.status_code == 400
-        html = response.get_data(as_text=True)
-        assert "Invalid email" in html
+
+        assert response.status_code == 200
+        assert response.is_json
+
+        json = response.get_json()
+        assert json["name"] == "Susan Rosh"
+        assert json["email"] == "susan@example.com"
+        assert json["content"] == "Hello from the timeline!"
+
+    def test_timeline_rejects_oversized_and_control_character_input(self):
+        self.assert_timeline_validation_error(
+            {
+                "name": "A" * 81,
+                "email": "susan@example.com",
+                "content": "Hello world",
+            },
+            "Name must be 80 characters or fewer.",
+            "name",
+        )
+
+        self.assert_timeline_validation_error(
+            {
+                "name": "Susan",
+                "email": "susan@example.com",
+                "content": "A" * 501,
+            },
+            "Post must be 500 characters or fewer.",
+            "content",
+        )
+
+        self.assert_timeline_validation_error(
+            {
+                "name": "Susan\x00",
+                "email": "susan@example.com",
+                "content": "Hello world",
+            },
+            "Name contains unsupported characters.",
+            "name",
+        )
 
     def test_travel_counts_stay_in_sync(self):
         expected_count = len(VISITED_PLACES)

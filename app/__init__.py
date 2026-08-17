@@ -12,6 +12,12 @@ from .data import EDUCATION, EXPERIENCES, HOBBIES, HOBBY_SECTIONS, VISITED_PLACE
 load_dotenv()
 app = Flask(__name__)
 
+EMAIL_REGEX = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
+CONTROL_CHAR_REGEX = re.compile(r"[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]")
+MAX_NAME_LENGTH = 80
+MAX_EMAIL_LENGTH = 254
+MAX_CONTENT_LENGTH = 500
+
 if os.getenv("TESTING") == "true":
     print("Running in test mode")
     mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
@@ -134,19 +140,51 @@ def health():
     }
 
 
+def validation_error(message, field):
+    return {
+        "error": message,
+        "field": field,
+    }, 400
+
+
+def clean_form_value(field):
+    return (request.form.get(field) or "").strip()
+
+
+def validate_timeline_post(name, email, content):
+    if not name:
+        return validation_error("Please enter your name.", "name")
+    if len(name) > MAX_NAME_LENGTH:
+        return validation_error("Name must be 80 characters or fewer.", "name")
+    if CONTROL_CHAR_REGEX.search(name):
+        return validation_error("Name contains unsupported characters.", "name")
+
+    if not email:
+        return validation_error("Please enter your email address.", "email")
+    if len(email) > MAX_EMAIL_LENGTH:
+        return validation_error("Email must be 254 characters or fewer.", "email")
+    if CONTROL_CHAR_REGEX.search(email) or not EMAIL_REGEX.match(email):
+        return validation_error("Please enter a valid email address.", "email")
+
+    if not content:
+        return validation_error("Please enter a timeline post.", "content")
+    if len(content) > MAX_CONTENT_LENGTH:
+        return validation_error("Post must be 500 characters or fewer.", "content")
+    if CONTROL_CHAR_REGEX.search(content):
+        return validation_error("Post contains unsupported characters.", "content")
+
+    return None
+
+
 @app.route("/api/timeline_post", methods=["POST"])
 def post_timeline_post():
-    EMAIL_REGEX = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
-    name = request.form.get("name")
-    email = request.form.get("email")
-    content = request.form.get("content")
+    name = clean_form_value("name")
+    email = clean_form_value("email").lower()
+    content = clean_form_value("content")
 
-    if not name:
-        return "Invalid name", 400
-    if not email or not EMAIL_REGEX.match(email):
-        return "Invalid email", 400
-    if not content:
-        return "Invalid content", 400
+    error = validate_timeline_post(name, email, content)
+    if error:
+        return error
 
     timeline_post = TimelinePost.create(name=name, email=email, content=content)
 

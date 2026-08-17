@@ -121,6 +121,30 @@ function setStatus(message, type = "neutral") {
     timelineStatus.dataset.status = type;
 }
 
+function focusField(fieldName) {
+    const field = timelineForm.elements[fieldName];
+
+    if (field) {
+        field.focus();
+    }
+}
+
+async function readErrorMessage(response) {
+    try {
+        const data = await response.json();
+
+        if (data.error) {
+            const error = new Error(data.error);
+            error.field = data.field;
+            return error;
+        }
+    } catch (error) {
+        // Fall through to the generic message below when the response is not JSON.
+    }
+
+    return new Error("Could not save timeline post. Please try again.");
+}
+
 function formatDate(value) {
     const date = new Date(value);
 
@@ -222,17 +246,19 @@ async function submitTimelinePost(event) {
         const response = await fetch("/api/timeline_post", {
             method: "POST",
             body: formData,
+            headers: { Accept: "application/json" },
         });
 
         if (!response.ok) {
-            throw new Error("Could not save timeline post.");
+            throw await readErrorMessage(response);
         }
 
         timelineForm.reset();
         setStatus("Posted! The timeline has been refreshed.", "success");
         await loadTimelinePosts();
     } catch (error) {
-        setStatus("Something went wrong. Please try again.", "error");
+        setStatus(error.message, "error");
+        focusField(error.field);
     } finally {
         submitButton.disabled = false;
     }
