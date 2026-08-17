@@ -116,6 +116,24 @@ def timeline():
     )
 
 
+@app.route("/health")
+def health():
+    try:
+        mydb.connect(reuse_if_open=True)
+        mydb.execute_sql("SELECT 1").fetchone()
+    except Exception as error:
+        return {
+            "status": "error",
+            "database": "error",
+            "message": str(error),
+        }, 503
+
+    return {
+        "status": "ok",
+        "database": "ok",
+    }
+
+
 @app.route("/api/timeline_post", methods=["POST"])
 def post_timeline_post():
     EMAIL_REGEX = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")

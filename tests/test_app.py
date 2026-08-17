@@ -125,6 +125,16 @@ class AppTestCase(unittest.TestCase):
         # button tests
         submit_button = soup.find("button", class_="timeline-submit")
         assert submit_button["type"] == "submit"
+
+    def test_health_endpoint_checks_database(self):
+        response = self.client.get("/health")
+
+        assert response.status_code == 200
+        assert response.is_json
+        assert response.get_json() == {
+            "status": "ok",
+            "database": "ok",
+        }
         
     def test_malformed_timeline_post(self):
         response = self.client.post("/api/timeline_post",data={
